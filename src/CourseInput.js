@@ -3,9 +3,26 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notificationSound from './mixkit-long-pop-2358.wav';
 import './App.css';
-
+import cgpaLogo from './cgpa.png';
 const availableCourses = {
-  '2ndYear': [],
+  '1stYear': [
+    { name: 'DISCRETE MATHEMATICS', credits: 4 },
+    { name: 'FUNDAMENTALS OF IOT AND SENSORS', credits: 4 },
+    { name: 'COMPUTATIONAL THINKING FOR STRUCTURED DESIGN', credits: 5 },
+    { name: 'HUMAN VALUES GENDER EQUITY AND PROFESSIONAL ETHICS', credits: 2 },
+    { name: 'DESIGN THINKING AND INNOVATION', credits: 3 },
+    { name: 'LANGUAGE SKILLS FOR ENGINEERS', credits: 2 }
+  ],
+  '2ndYear': [  
+    { name: 'ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING (ADVANCED)', credits: 4 },
+    { name: 'PROCESSORS AND CONTROLLERS', credits: 4 },
+    { name: 'LINUX ADMINISTRATION & AUTOMATION', credits: 4 },
+    { name: 'DESIGN AND ANALYSIS OF ALGORITHMS (ADVANCED)', credits: 7 },
+    { name: 'DATABASE MANAGEMENT SYSTEMS (ADVANCED)', credits: 6 },
+    { name: 'JAPANESE LANGUAGE', credits: 3 },
+    { name: 'SOCIAL IMMERSIVE LEARNING', credits: 1 },
+    { name: 'PROBABILITY, STATISTICS & QUEUEING THEORY', credits: 4 }
+  ],
   '3rdYear': [
     { name: 'SOLUTIONS ARCHITECTING ON CLOUD', credits: 3 },
     { name: 'MACHINE LEARNING (ADVANCED)', credits: 6 },
@@ -22,6 +39,7 @@ const availableCourses = {
 };
 
 const CourseInput = () => {
+  const [selectedYear, setSelectedYear] = useState('');
   const [courses, setCourses] = useState([{ name: '', credits: '', totalMarks: '', internalMarks: '', endSemMarks: '' }]);
   const [cgpa, setCgpa] = useState(0);
   const [error, setError] = useState('');
@@ -117,6 +135,7 @@ const CourseInput = () => {
     setCgpa(0);
     notifyInfo("All courses have been reset.");
   };
+    
 
   const calculateCGPA = () => {
     let totalCredits = 0;
@@ -128,11 +147,38 @@ const CourseInput = () => {
 
       if (course.totalMarks) {
         totalMarks = parseFloat(course.totalMarks);
+        if (isNaN(totalMarks) || totalMarks > 100 || totalMarks < 0) {
+          notifyError("Please enter valid marks between 0 and 100.");
+          hasError = true;
+          return;
+        }
       } else if (course.internalMarks && course.endSemMarks) {
-        totalMarks = parseFloat(course.internalMarks) + parseFloat(course.endSemMarks);
+        const internalMarks = parseFloat(course.internalMarks);
+        const endSemMarks = parseFloat(course.endSemMarks);
+      
+        if (
+          isNaN(internalMarks) || isNaN(endSemMarks) ||
+          internalMarks < 0 || internalMarks > 100 ||
+          endSemMarks < 0 || endSemMarks > 100
+        ) {
+          notifyError("Internal and End-Sem marks must be between 0 and 100.");
+          hasError = true;
+          return;
+        }
+      
+        totalMarks = internalMarks + endSemMarks;
+      
+        if (totalMarks > 100) {
+          notifyError("The combined marks should not exceed 100.");
+          hasError = true;
+          return;
+        }
       } else {
         hasError = true;
+        notifyError("Please provide the necessary marks.");
+        return;
       }
+      
 
       if (!hasError) {
         const gradePoints = grade(totalMarks);
@@ -161,47 +207,64 @@ const CourseInput = () => {
     newCourses[index].credits = selectedCourse.credits;
     setCourses(newCourses);
   };
-
+  const handleYearChange = (e) => {
+    const selectedYear = e.target.value;
+    setSelectedYear(selectedYear);
+    
+    setCourses([{ name: '', credits: '', totalMarks: '', internalMarks: '', endSemMarks: '' }]);
+  };
   return (
+
+    <div>
+      <header className="header">
+        <img src={cgpaLogo} alt="CGPA Logo" className="logo" />
+        <h1 className="title">CGPA Calculator</h1>
+      </header>
     <div className="container">
       <div className="course-input-section">
-        <h1 className="title">Enter Course Details</h1>
-
+        <h2>Enter Course Details</h2>
+        <select
+              value={selectedYear}
+              onChange={handleYearChange}
+              className="input-field"
+            >
+              <option value="">Select Year</option>
+              <option value="1stYear">1st Year</option>
+              <option value="2ndYear">2nd Year</option>
+              <option value="3rdYear">3rd Year</option>
+            </select>
         {courses.map((_, index) => (
           <div key={index} className="course-input-card">
             <h3>Course {index + 1}</h3>
-
+            
             <div className="form-group">
               <label htmlFor={`name-${index}`}>Course Name:</label>
               <select
                 id={`name-${index}`}
                 value={courses[index].name}
                 onChange={(e) => {
-                  const selectedCourse = [
-                    ...availableCourses['2ndYear'],
-                    ...availableCourses['3rdYear']
-                  ].find(course => course.name === e.target.value);
-                  handleCourseSelect(index, selectedCourse);
+                  const selectedCourse = availableCourses[selectedYear]?.find(course => course.name === e.target.value);
+                  if (selectedCourse) {
+                    handleCourseSelect(index, selectedCourse);
+                  }
                 }}
                 className="course-dropdown"
               >
                 <option value="">Select a Course</option>
-                <optgroup label="2nd Year">
-                  {availableCourses['2ndYear'].map((course, i) => (
-                    <option key={i} value={course.name}>
-                      {course.name}
-                    </option>
-                  ))}
-                </optgroup>
-                <optgroup label="3rd Year">
-                  {availableCourses['3rdYear'].map((course, i) => (
-                    <option key={i} value={course.name}>
-                      {course.name}
-                    </option>
-                  ))}
-                </optgroup>
+                {selectedYear && (
+                  <>
+                    <optgroup label={`${selectedYear.charAt(0).toUpperCase() + selectedYear.slice(1)} Courses`}>
+                      {availableCourses[selectedYear].map((course, i) => (
+                        <option key={i} value={course.name}>
+                          {course.name}
+                        </option>
+                      ))}
+                    </optgroup>
+                  </>
+                )}
               </select>
-            </div>
+              </div>
+
 
             <div className="form-group">
               <label>Credits: {courses[index].credits}</label>
@@ -284,6 +347,7 @@ const CourseInput = () => {
       </div>
 
       <ToastContainer />
+    </div>
     </div>
   );
 };
