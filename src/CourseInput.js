@@ -35,6 +35,12 @@ const availableCourses = {
     { name: 'ARTIFICIAL NEURAL NETWORKS', credits: 3 },
     { name: 'SOCIAL IMMERSIVE LERANING', credits: 1 },
     { name: 'PROBLEM SOLVING AND REASONING SKILLS-1', credits: 1 },
+    { name: 'DATA WAREHOUSING & MINING', credits: 3 },
+    { name: 'DATA ANALYTICS AND VISUALIZATION (ADVANCED)', credits: 6 },
+    { name: 'DATA ANALYTICS AND VISUALIZATION (REGULAR)', credits: 4 },
+    { name: 'INTRODUCTION TO BLOCKCHAIN & CRYPTO CURRENCIES ', credits: 3 },
+    { name: 'CRYPT ANALYSIS & CYBER DEFENSE (REGULAR)', credits: 4 },
+    { name: 'CRYPT ANALYSIS & CYBER DEFENSE (ADVANCED)', credits: 6 },
   ],
 };
 
@@ -43,7 +49,7 @@ const CourseInput = () => {
   const [courses, setCourses] = useState([{ name: '', credits: '', totalMarks: '', internalMarks: '', endSemMarks: '' }]);
   const [cgpa, setCgpa] = useState(0);
   const [error, setError] = useState('');
-
+  const [tcredits,setCredits]=useState(0);
   const notifySuccess = (message) => {
     const audio = new Audio(notificationSound);
     audio.play();
@@ -183,7 +189,7 @@ const CourseInput = () => {
       if (!hasError) {
         const gradePoints = grade(totalMarks);
         const credits = parseFloat(course.credits);
-
+        
         totalCredits += credits;
         totalGradePoints += gradePoints * credits;
       }
@@ -195,6 +201,7 @@ const CourseInput = () => {
       setCgpa(0);
     } else {
       setError('');
+      setCredits(totalCredits);
       const cgpa = totalCredits !== 0 ? totalGradePoints / totalCredits : 0;
       setCgpa(cgpa);
       notifySuccess(`Your CGPA is ${cgpa.toFixed(2)}`);
@@ -343,6 +350,7 @@ const CourseInput = () => {
           </tbody>
         </table>
         <h3>CGPA: {cgpa.toFixed(2)}</h3>
+        <h3>TOTAL CREDITS: {tcredits}</h3>
         {error && <div className="error-message">{error}</div>}
       </div>
 
