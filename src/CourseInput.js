@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notificationSound from './mixkit-long-pop-2358.wav';
@@ -141,7 +141,15 @@ const CourseInput = () => {
     setCgpa(0);
     notifyInfo("All courses have been reset.");
   };
-    
+  useEffect(() => {
+    try {
+      if (window.adsbygoogle && window.adsbygoogle.loaded) {
+        window.adsbygoogle.push({});
+      }
+    } catch (e) {
+      console.error("Adsbygoogle script failed to initialize.", e);
+    }
+  }, [courses]);
 
   const calculateCGPA = () => {
     let totalCredits = 0;
@@ -353,20 +361,18 @@ const CourseInput = () => {
         <h3>TOTAL CREDITS: {tcredits}</h3>
         {error && <div className="error-message">{error}</div>}
 
-        {/* AdSense Ad */}
-        <div className="ads-container">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1602297763656058"
-            crossorigin="anonymous"></script>
-          <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-1602297763656058"
-            data-ad-slot="XXXXXX" // Replace with your Ad Unit ID
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          ></ins>
-          <script>{`(adsbygoogle = window.adsbygoogle || []).push({});`}</script>
-        </div>
+        
+          <div className="ads">
+        <ins
+          className="adsbygoogle"
+          style={{ display: 'block', textAlign: 'center', margin: '20px 0' }}
+          data-ad-client={process.env.REACT_APP_ADSENSE_CLIENT_ID} // AdSense Publisher ID from .env
+          data-ad-slot={process.env.REACT_APP_ADSENSE_SLOT_ID} // AdSense Slot ID from .env
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        ></ins>
+      </div>
+
       </div>
 
 
