@@ -362,16 +362,19 @@ const CourseInput = () => {
         {error && <div className="error-message">{error}</div>}
 
         
-          <div className="ads">
-        <ins
-          className="adsbygoogle"
-          style={{ display: 'block', textAlign: 'center', margin: '20px 0' }}
-          data-ad-client={process.env.REACT_APP_ADSENSE_CLIENT_ID} // AdSense Publisher ID from .env
-          data-ad-slot={process.env.REACT_APP_ADSENSE_SLOT_ID} // AdSense Slot ID from .env
-          data-ad-format="auto"
-          data-full-width-responsive="true"
-        ></ins>
-      </div>
+        <div className="ads">
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'block' }}
+            data-ad-client={process.env.REACT_APP_ADSENSE_CLIENT_ID}
+            data-ad-slot={process.env.REACT_APP_ADSENSE_SLOT_ID}
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
 
       </div>
 
