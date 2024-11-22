@@ -329,7 +329,7 @@ const CourseInput = () => {
         </div>
       </div>
 
-      <div className="course-display-section">
+            <div className="course-display-section">
         <h3>Selected Courses</h3>
         <table className="courses-table">
           <thead>
@@ -352,7 +352,23 @@ const CourseInput = () => {
         <h3>CGPA: {cgpa.toFixed(2)}</h3>
         <h3>TOTAL CREDITS: {tcredits}</h3>
         {error && <div className="error-message">{error}</div>}
+
+        {/* AdSense Ad */}
+        <div className="ads-container">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1602297763656058"
+            crossorigin="anonymous"></script>
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-1602297763656058"
+            data-ad-slot="XXXXXX" // Replace with your Ad Unit ID
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+          <script>{`(adsbygoogle = window.adsbygoogle || []).push({});`}</script>
+        </div>
       </div>
+
 
       <ToastContainer />
     </div>
