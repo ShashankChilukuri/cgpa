@@ -14,11 +14,13 @@ const availableCourses = {
     { name: 'LANGUAGE SKILLS FOR ENGINEERS', credits: 2 }
   ],
   '2ndYear': [  
-    { name: 'ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING (ADVANCED)', credits: 4 },
+    { name: 'ARTIFICIAL INTELLIGENCE AND MACHINE LEARNING', credits: 4 },
     { name: 'PROCESSORS AND CONTROLLERS', credits: 4 },
     { name: 'LINUX ADMINISTRATION & AUTOMATION', credits: 4 },
     { name: 'DESIGN AND ANALYSIS OF ALGORITHMS (ADVANCED)', credits: 7 },
+    { name: 'DESIGN AND ANALYSIS OF ALGORITHMS (REGULAR)', credits: 5 },
     { name: 'DATABASE MANAGEMENT SYSTEMS (ADVANCED)', credits: 6 },
+    { name: 'DATABASE MANAGEMENT SYSTEMS (REGULAR)', credits: 4 },
     { name: 'JAPANESE LANGUAGE', credits: 3 },
     { name: 'SOCIAL IMMERSIVE LEARNING', credits: 1 },
     { name: 'PROBABILITY, STATISTICS & QUEUEING THEORY', credits: 4 }
