@@ -111,6 +111,16 @@ const CourseInput = () => {
     setCourses(newCourses);
   };
 
+  const gradepoint = (num) => {
+    if (num >= 90) return 'O';
+    else if (num >= 80) return 'A+';
+    else if (num >= 70) return 'A';
+    else if (num >= 60) return 'B+';
+    else if (num >= 50) return 'B';
+    else if (num >= 40) return 'P';
+    else return 'F';
+  };
+  
   const addNewCourse = () => {
     if (!courses.some(course => course.name === '')) {
       setCourses([...courses, { name: '', credits: '', totalMarks: '', internalMarks: '', endSemMarks: '' }]);
@@ -347,6 +357,7 @@ const CourseInput = () => {
               <th>Course Name</th>
               <th>Credits</th>
               <th>Total Marks</th>
+              <th>Grade</th>
             </tr>
           </thead>
           <tbody>
@@ -355,6 +366,7 @@ const CourseInput = () => {
                 <td>{course.name}</td>
                 <td>{course.credits}</td>
                 <td>{course.totalMarks || (parseFloat(course.internalMarks) + parseFloat(course.endSemMarks))}</td>
+                <td>{gradepoint(course.totalMarks) || gradepoint((parseFloat(course.internalMarks) + parseFloat(course.endSemMarks)))}</td>
               </tr>
             ))}
           </tbody>
