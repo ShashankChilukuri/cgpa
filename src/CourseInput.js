@@ -27,8 +27,10 @@ const availableCourses = {
     { name: 'PDC', credits: 3 },
     { name: 'DL', credits: 6 },
     { name: 'EPAM', credits: 3 },
-    { name: 'PS-2', credits: 2 }
-  ]
+    { name: 'PS-2', credits: 2 },
+    { name: 'CLOUD BASED AI/ML SPECIALITY', credits: 4 },
+    { name: 'SIL', credits: 1 }
+      ]
 
 };
 
