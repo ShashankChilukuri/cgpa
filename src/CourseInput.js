@@ -25,7 +25,8 @@ const availableCourses = {
     { name: 'SOCIAL IMMERSIVE LEARNING', credits: 1 },
     { name: 'PROBABILITY, STATISTICS & QUEUEING THEORY', credits: 4 }
   ],
-  '3rdYear': [
+  '3rdYear':{ 
+    'ODD':[
     { name: 'SOLUTIONS ARCHITECTING ON CLOUD', credits: 3 },
     { name: 'MACHINE LEARNING (ADVANCED)', credits: 6 },
     { name: 'MACHINE LEARNING (REGULAR)', credits: 4 },
@@ -44,6 +45,13 @@ const availableCourses = {
     { name: 'CRYPT ANALYSIS & CYBER DEFENSE (REGULAR)', credits: 4 },
     { name: 'CRYPT ANALYSIS & CYBER DEFENSE (ADVANCED)', credits: 6 },
   ],
+  'EVEN': [
+    { name: 'PDC', credits: 3 },
+    { name: 'DL', credits: 6 },
+    { name: 'EPAM', credits: 3 },
+    { name: 'PS-2', credits: 2 }
+  ]
+}
 };
 
 const CourseInput = () => {
