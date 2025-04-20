@@ -25,33 +25,13 @@ const availableCourses = {
     { name: 'SOCIAL IMMERSIVE LEARNING', credits: 1 },
     { name: 'PROBABILITY, STATISTICS & QUEUEING THEORY', credits: 4 }
   ],
-  '3rdYear':{ 
-    'ODD':[
-    { name: 'SOLUTIONS ARCHITECTING ON CLOUD', credits: 3 },
-    { name: 'MACHINE LEARNING (ADVANCED)', credits: 6 },
-    { name: 'MACHINE LEARNING (REGULAR)', credits: 4 },
-    { name: 'ENTERPRISING PROGRAMING (ADVANCED)', credits: 6 },
-    { name: 'ENTERPRISING PROGRAMING (REGULAR)', credits: 4 },
-    { name: 'JAVA FULL STACK DEVELOPMENT + MICROSERVICES (ADVANCED)', credits: 4 },
-    { name: 'JAVA FULL STACK DEVELOPMENT + MICROSERVICES (REGULAR)', credits: 2 },
-    { name: 'COMPILER DESIGN', credits: 3 },
-    { name: 'ARTIFICIAL NEURAL NETWORKS', credits: 3 },
-    { name: 'SOCIAL IMMERSIVE LERANING', credits: 1 },
-    { name: 'PROBLEM SOLVING AND REASONING SKILLS-1', credits: 1 },
-    { name: 'DATA WAREHOUSING & MINING', credits: 3 },
-    { name: 'DATA ANALYTICS AND VISUALIZATION (ADVANCED)', credits: 6 },
-    { name: 'DATA ANALYTICS AND VISUALIZATION (REGULAR)', credits: 4 },
-    { name: 'INTRODUCTION TO BLOCKCHAIN & CRYPTO CURRENCIES ', credits: 3 },
-    { name: 'CRYPT ANALYSIS & CYBER DEFENSE (REGULAR)', credits: 4 },
-    { name: 'CRYPT ANALYSIS & CYBER DEFENSE (ADVANCED)', credits: 6 },
-  ],
-  'EVEN': [
+  '3rdYear':
+   [
     { name: 'PDC', credits: 3 },
     { name: 'DL', credits: 6 },
     { name: 'EPAM', credits: 3 },
     { name: 'PS-2', credits: 2 }
-  ]
-}
+  ],
 };
 
 const CourseInput = () => {
